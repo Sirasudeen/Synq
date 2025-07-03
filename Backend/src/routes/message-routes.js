@@ -5,3 +5,4 @@ const router = express.Router();
 
 router.get("/users", checkAuth, getUsers);
 router.get("/:id", checkAuth, getMessages);
+router.post("/send/:id", checkAuth, sendMessage);
