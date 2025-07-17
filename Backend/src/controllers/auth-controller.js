@@ -4,12 +4,10 @@ import bcrypt from 'bcryptjs';
 import { generateToken } from '../lib/utils.js';
 import cloudinary from '../lib/cloudinary.js';
 export const signup = async (req, res) => {
-    // Handle user signup logic here
-    // res.status(201).json({ message: "User signed up successfully" });
     const { email, fullName, password, } = req.body;
     try {
         if (!email || !fullName || !password)
-            return res.status(400).json({ message: "Password must be at least 6 characters long" });
+            return res.status(400).json({ message: "Enter details correctly" });
         if (password.length < 6) {
             return res.status(400).json({ message: "Password must be at least 6 characters long" });
         }
@@ -23,7 +21,12 @@ export const signup = async (req, res) => {
         if (user) {
             generateToken(user._id, res);
             await user.save();
-            res.status(201).json({ message: "User signed up successfully" });
+            res.status(201).json({
+        _id: newUser._id,
+        fullName: newUser.fullName,
+        email: newUser.email,
+        profilePic: newUser.profilePic,
+      })
         }
         else {
             res.status(400).json({ message: "Invalid user data" });
@@ -51,7 +54,12 @@ export const login = async (req, res) => {
             return res.status(401).json({ message: "Invalid password" });
         }
         generateToken(user._id, res);
-        res.status(200).json({ message: "User logged in successfully" });
+            res.status(200).json({
+            _id: user._id,
+            fullName: user.fullName,
+            email: user.email,
+            profilePic: user.profilePic,
+            });
     }
     catch (error) {
         console.error("Error during login:", error);
@@ -59,7 +67,6 @@ export const login = async (req, res) => {
     }
 }
 export const logout = (req, res) => {
-    // Handle user logout logic here
     try {
         res.cookie("jwt", "", { maxAge: 0, });
         res.status(200).json({ message: "User logged out successfully" });
@@ -72,15 +79,15 @@ export const logout = (req, res) => {
 
 export const updateProfile = async (req, res) => {
     try {
-        const { ProfilePic } = req.body;
+        const { profilePic } = req.body;
         const userId = req.user._id;
-        if (!ProfilePic) {
+        if (!profilePic) {
             return res.status(400).json({ message: "Profile picture is required" });
         }
-        const c_url = await cloudinary.uploader.upload(ProfilePic);
-        const updatedUser = await User.findByIdAndUpdate(userId, { ProfilePic: c_url.secure_url }, { new: true });
+        const c_url = await cloudinary.uploader.upload(profilePic);
+        const updatedUser = await User.findByIdAndUpdate(userId, { profilePic: c_url.secure_url }, { new: true });
         res.status(200).json({
-            message: "Profile updated successfully",
+            updatedUser
         });
 
     } catch (error) {

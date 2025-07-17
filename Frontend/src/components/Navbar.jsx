@@ -11,10 +11,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-full">
 
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <MessageSquare className="size-5 text-primary" />
-            </div>
-            <h1 className="text-xl font-bold tracking-wide">Chatty</h1>
+
+            <h1 className="text-xl font-bold tracking-wide">Synq</h1>
           </Link>
 
           <div className="flex items-center gap-3">
