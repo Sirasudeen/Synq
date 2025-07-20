@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Toaster from "react-hot-toast"
+import {Toaster} from "react-hot-toast"
 import { Routes,Route,Navigate } from 'react-router-dom'
 import {Loader} from 'lucide-react'
 import Navbar from './components/Navbar'
@@ -11,7 +11,7 @@ import SettingPage from './Pages/SettingPage'
 import { useAuthStore } from './store/useAuthStore'
 import { useThemeStore } from './store/useThemeStore'
 const App = () => {
-  const {authUser,checkAuth,isCheckingAuth} = useAuthStore();
+  const {authUser,checkAuth,isCheckingAuth,onlineUsers} = useAuthStore();
   const {theme} = useThemeStore();
   useEffect(() => {
     checkAuth();
