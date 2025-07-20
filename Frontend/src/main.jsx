@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client'
 import HomePage from './Pages/HomePage.jsx'
 import LoginPage from './Pages/LoginPage.jsx'
 import SettingPage from './Pages/SettingPage.jsx'
-import
 import './index.css'
 import App from './App.jsx'
 
