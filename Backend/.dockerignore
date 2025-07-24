@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules
+
+# Build output / local logs
+dist
+logs
+*.log
+
+# OS/system files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker files themselves
+Dockerfile
+.dockerignore
+
+# Env / secrets
+.env
+.env.*  # for variants like .env.production

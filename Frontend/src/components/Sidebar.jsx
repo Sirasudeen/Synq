@@ -21,14 +21,12 @@ const Sidebar = () => {
 
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col bg-base-100 transition-all duration-300">
-      {/* Header */}
       <div className="border-b border-base-300 w-full px-4 py-5">
         <div className="flex items-center gap-2">
           <Users className="size-5 text-primary" />
           <span className="font-semibold text-base-content hidden lg:block">Your Contacts</span>
         </div>
 
-        {/* Filter toggle */}
         <div className="mt-4 hidden lg:flex items-center justify-between">
           <label className="flex items-center gap-2 cursor-pointer text-sm text-base-content/80">
             <input
@@ -45,7 +43,6 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* User List */}
       <div className="overflow-y-auto w-full py-3 px-2 space-y-1">
         {filteredUsers.map((user) => (
           <button
@@ -68,7 +65,6 @@ const Sidebar = () => {
               )}
             </div>
 
-            {/* Info (lg only) */}
             <div className="hidden lg:block min-w-0">
               <div className="font-medium text-sm truncate text-base-content">
                 {user.fullName}
