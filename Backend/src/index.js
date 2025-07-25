@@ -3,16 +3,18 @@ import dotenv from "dotenv";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import { connectDB } from "./lib/db.js";
-import {server,app} from "./lib/socket.js";
+import { server, app } from "./lib/socket.js";
 import authRoutes from "./routes/auth-router.js";
 import { connect } from "mongoose";
 import message from "./models/message-model.js";
 import router from './routes/message-routes.js'
 dotenv.config();
+import path from 'path';
 
+const __dirname = path.resolve();
 app.use(cors({
     origin: process.env.FRONTEND_URL,
-    credentials: true, 
+    credentials: true,
 }));
 
 app.use(express.json({ limit: '10mb' }));
