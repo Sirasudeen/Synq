@@ -13,7 +13,7 @@ import path from 'path';
 
 const __dirname = path.resolve();
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "http://localhost:5173",
     credentials: true,
 }));
 
@@ -22,6 +22,14 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/message", router);
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../Frontend/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../Frontend", "dist", "index.html"));
+    });
+}
+console.log("NODE_ENV:", process.env.NODE_ENV);
 
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
@@ -29,3 +37,4 @@ server.listen(port, () => {
     connectDB();
 
 });
+
